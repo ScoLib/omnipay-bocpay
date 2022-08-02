@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\BocPay;
+namespace Omnipay\BOCPay;
 
 class WapGateway extends BaseAbstractGateway
 {

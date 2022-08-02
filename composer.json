@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Omnipay\\BocPay\\": "src/"
+            "Omnipay\\BOCPay\\": "src/"
         }
     },
     "scripts": {
