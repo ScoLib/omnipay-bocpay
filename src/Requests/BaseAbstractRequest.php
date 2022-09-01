@@ -5,7 +5,6 @@ namespace Omnipay\BOCPay\Requests;
 
 use Omnipay\BOCPay\Common\Helper;
 use Omnipay\BOCPay\Common\Process;
-use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\Common\Message\AbstractRequest;
 
 abstract class BaseAbstractRequest extends AbstractRequest
@@ -52,17 +51,18 @@ abstract class BaseAbstractRequest extends AbstractRequest
 
         file_put_contents($sourceFile, $str);
 
-        $this->createProcess(
+        $process = $this->createProcess(
             'com.bocnet.common.security.P7Sign',
             $this->getCertPath(),
             $this->getCertPassword(),
             $sourceFile,
             $targetFile
-        )->start()->join()->stop();
+        );
+        $process->start()->join()->stop();
 
         $signData = file_get_contents($targetFile);
         if (!$signData) {
-            throw new \Exception('加签失败，请检查证书配置');
+            throw new \Exception('加签失败，请检查证书配置' . $process->getStderr());
         }
 
         @unlink($sourceFile);
