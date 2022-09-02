@@ -22,7 +22,7 @@ class CompletePurchaseRequest extends BaseAbstractRequest
     {
         return '';
     }
-    
+
     public function getData()
     {
         $this->validateParams();

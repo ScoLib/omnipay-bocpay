@@ -129,9 +129,9 @@ class RefundOrderRequest extends BaseAbstractRequest
         $order = $payload['body']['orderTrans'];
 
         // merchantNo|mRefundSeq|refundAmount|orderNo|orderSeq|orderAmount|bankTranSeq|tranTime|dealStatus
-        $signStr = "{$order['merchantNo']}|{$order['mRefundSeq']}|{$order['refundAmount']}"
+        $signStr = "{$payload['header']['merchantNo']}|{$order['mRefundSeq']}|{$order['refundAmount']}"
             . "|{$order['orderNo']}|{$order['orderSeq']}|{$order['orderAmount']}|{$order['bankTranSeq']}"
-            . "|{$order['tranTime']}|{$order['dealStatus']}";
+            . "|{$order['tranTime']}|{$payload['header']['dealStatus']}";
 
         $match = $this->verify($signStr, $order['signData']);
 
