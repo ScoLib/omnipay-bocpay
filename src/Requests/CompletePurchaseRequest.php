@@ -13,6 +13,16 @@ class CompletePurchaseRequest extends BaseAbstractRequest
 
     private $verifyCertPath;
 
+    protected function getSignDataStr($data)
+    {
+        return "";
+    }
+
+    protected function getRequestUrl()
+    {
+        return '';
+    }
+    
     public function getData()
     {
         $this->validateParams();
@@ -79,5 +89,5 @@ class CompletePurchaseRequest extends BaseAbstractRequest
         return $this->response = new CompletePurchaseResponse($this, $data);
     }
 
-    
+
 }

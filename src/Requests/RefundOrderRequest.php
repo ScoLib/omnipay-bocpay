@@ -126,7 +126,7 @@ class RefundOrderRequest extends BaseAbstractRequest
     {
         $payload  = parent::sendData($data);
 
-        $order = $data['body']['orderTrans'];
+        $order = $payload['body']['orderTrans'];
 
         // merchantNo|mRefundSeq|refundAmount|orderNo|orderSeq|orderAmount|bankTranSeq|tranTime|dealStatus
         $signStr = "{$order['merchantNo']}|{$order['mRefundSeq']}|{$order['refundAmount']}"
