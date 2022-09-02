@@ -60,10 +60,6 @@ class CompletePurchaseRequest extends BaseAbstractRequest
 
         $match = $this->verify($signStr, $data['signData']);
 
-        if (! $match) {
-            throw new InvalidRequestException('The signature is not match');
-        }
-
         return $this->response = new CompletePurchaseResponse($this, $data);
     }
 

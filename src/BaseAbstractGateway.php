@@ -110,9 +110,9 @@ abstract class BaseAbstractGateway extends AbstractGateway
     /**
      * @return mixed
      */
-    public function getPrivateKeyPath()
+    public function getVerifyCertPath()
     {
-        return $this->getParameter('private_key_path');
+        return $this->getParameter('verify_cert_path');
     }
 
     /**
@@ -120,9 +120,9 @@ abstract class BaseAbstractGateway extends AbstractGateway
      *
      * @return $this
      */
-    public function setPrivateKeyPath($value)
+    public function setVerifyCertPath($value)
     {
-        return $this->setParameter('private_key_path', $value);
+        return $this->setParameter('verify_cert_path', $value);
     }
 
     /**

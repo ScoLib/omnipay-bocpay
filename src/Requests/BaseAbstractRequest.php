@@ -62,12 +62,17 @@ abstract class BaseAbstractRequest extends AbstractRequest
         $process->start()->join()->stop();
 
         $signData = file_get_contents($targetFile);
-        if (!$signData) {
-            throw new \Exception('加签失败，请检查证书配置' . $process->getStderr());
-        }
-
         @unlink($sourceFile);
         @unlink($targetFile);
+
+        if (!$signData) {
+            throw new \Exception(
+                "加签失败，请检查证书配置\n"
+                . $process->getCommand() . "\n"
+                . json_encode($process->getOutput(), JSON_UNESCAPED_UNICODE)
+            );
+        }
+
         return $signData;
     }
 
@@ -91,6 +96,13 @@ abstract class BaseAbstractRequest extends AbstractRequest
         @unlink($sourceFile);
         @unlink($targetFile);
 
+        if (!$res) {
+            throw new \Exception(
+                "验签失败，请检查证书配置\n"
+                . $process->getCommand() . "\n"
+                . json_encode($process->getOutput(), JSON_UNESCAPED_UNICODE)
+            );
+        }
         return $res;
     }
 
