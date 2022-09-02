@@ -126,6 +126,19 @@ class RefundOrderRequest extends BaseAbstractRequest
     {
         $payload  = parent::sendData($data);
 
+        $order = $data['body']['orderTrans'];
+
+        // merchantNo|mRefundSeq|refundAmount|orderNo|orderSeq|orderAmount|bankTranSeq|tranTime|dealStatus
+        $signStr = "{$order['merchantNo']}|{$order['mRefundSeq']}|{$order['refundAmount']}"
+            . "|{$order['orderNo']}|{$order['orderSeq']}|{$order['orderAmount']}|{$order['bankTranSeq']}"
+            . "|{$order['tranTime']}|{$order['dealStatus']}";
+
+        $match = $this->verify($signStr, $order['signData']);
+
+        if (! $match) {
+            throw new InvalidRequestException('The signature is not match');
+        }
+
         return $this->response = new RefundOrderResponse($this, $payload);
     }
 }

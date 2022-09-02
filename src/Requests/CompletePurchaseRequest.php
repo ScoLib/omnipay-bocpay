@@ -79,26 +79,5 @@ class CompletePurchaseRequest extends BaseAbstractRequest
         return $this->response = new CompletePurchaseResponse($this, $data);
     }
 
-    protected function verify($signStr, $sign)
-    {
-        $sourceFile = $this->getTmpFile('source');
-        $targetFile = $this->getTmpFile('target');
-
-        file_put_contents($sourceFile, $sign);
-        file_put_contents($targetFile, $signStr);
-
-        $process = $this->createProcess(
-            'com.bocnet.common.security.P7Verify',
-            $this->getVerifyCertPath(),
-            $sourceFile,
-            $targetFile
-        );
-        $process->start()->join()->stop();
-
-        $res = strpos($process->getStdout(), 'VERIFY OK') !== false;
-        @unlink($sourceFile);
-        @unlink($targetFile);
-
-        return $res;
-    }
+    
 }
