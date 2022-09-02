@@ -11,6 +11,7 @@ abstract class BaseAbstractRequest extends AbstractRequest
 {
     private $certPath;
     private $certPassword;
+    private $verifyCertPath;
 
     protected $endpoint = 'https://ebspay.boc.cn/PGWPortal';
     private   $javaPath = 'java';
@@ -223,6 +224,25 @@ abstract class BaseAbstractRequest extends AbstractRequest
     public function getCertPassword()
     {
         return $this->certPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVerifyCertPath()
+    {
+        return $this->verifyCertPath;
+    }
+
+    /**
+     * @param $path
+     * @return $this
+     */
+    public function setVerifyCertPath($path)
+    {
+        $this->verifyCertPath = $path;
+
+        return $this;
     }
 
     /**

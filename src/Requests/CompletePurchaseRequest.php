@@ -10,9 +10,7 @@ use Omnipay\Common\Exception\InvalidRequestException;
 
 class CompletePurchaseRequest extends BaseAbstractRequest
 {
-
-    private $verifyCertPath;
-
+    
     protected function getSignDataStr($data)
     {
         return "";
@@ -52,26 +50,6 @@ class CompletePurchaseRequest extends BaseAbstractRequest
     public function setParams($value)
     {
         return $this->setParameter('params', $value);
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getVerifyCertPath()
-    {
-        return $this->verifyCertPath;
-    }
-
-    /**
-     * @param $path
-     * @return $this
-     */
-    public function setVerifyCertPath($path)
-    {
-        $this->verifyCertPath = $path;
-
-        return $this;
     }
 
     public function sendData($data)
